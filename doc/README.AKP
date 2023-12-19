@@ -1,0 +1,127 @@
+RCS5AP1: RCS version 5, ported to TOS by Allan Pratt, release 1, 1/30/91.
+
+This is RCS (Revision Control System, not Resource Constructon Set) version
+5 from the good people at Purdue.  It has been modified to run under TOS by
+Allan Pratt of Atari Computer Corporation.  Allan Pratt and Atari Computer
+Corp.  make this work freely available as specified under the terms of the
+GNU Public License as regards derivative works.  The port has been made
+carefully, but use of this program is at the user's own risk.  Please refer
+to the GNU Public license (included here in the file "copying") as to the
+absence of warranty and terms of redistribution.
+
+Every time this package is placed anywhere by me, it is placed there with
+both sources and binaries.  This fulfills the requirement that I make the
+sources freely available.  If a subsequent redistribution by someone else
+does not include the sources, that isn't my fault: blame the person who
+didn't distribute both.  If you want to redistribute this, please include
+both sources and binaries.  If you just want to use it yourself, you
+don't need the sources; get them if you want them.
+
+Finally, this is just a side-project for me at Atari, not part of my work.
+It is not a product supported by Atari.  I will be glad to receive reports
+of bugs or suggestions, but don't count on a reply or a new version, ever.
+In terms of support you can consider this freeware, which is to say I
+don't promise any support at all.
+
+The file RCS5AKP.DOC in the binary archive is a brief doc file explaining a
+little about this version of RCS, my modifications to it, and the command
+line options to the main programs.
+
+The file PORTING.DOC in the source archive contains notes for programmers
+who might want to change it (or make it compile under a different
+compiler).
+
+You need GNU diff version 1.15 or greater to use this; this DIFF included
+in the binary archive, and I put the source in DIFF115S.LZH in the same
+places I put RCS5AP1S.LZH and RCS5AP1B.LZH.
+
+MANIFEST:
+
+        In RCS5AP1B.LZH, the binary archive, you will find the executables
+(*.TTP) and pre-formatted documentation (*.1LP and *.5LP), plus RCS5AP.DOC,
+the user-level documentation for this release.  You will also find this
+file (because it's in all the archives) and COPYING, a statement of your
+rights and responsibilities in getting this and giving this stuff away.
+
+        RCS5AP1B.LZH contains the following files:
+
+        CI      .1LP     12,114
+        CI      .TTP     84,703
+        CO      .1LP     17,727
+        CO      .TTP     78,317
+        COPYING .        12,737         The GNU Public License, version 1
+        DIFF    .TTP     76,375
+        IDENT   .1LP      1,616
+        IDENT   .TTP     31,162
+        MERGE   .1LP      1,998
+        RCS     .1LP      8,771
+        RCS     .TTP     77,705
+        RCS5AP  .DOC      5,143         Read this second.
+        RCSCLEAN.1LP      2,586
+        RCSDIFF .1LP      3,250
+        RCSDIFF .TTP     67,994
+        RCSFILE .5LP      7,246
+        RCSFREEZ.1LP      2,186
+        RCSINTRO.1LP     10,965         Read this third.
+        RCSMERGE.1LP      3,603
+        README  .AKP                    You are reading this.
+        RLOG    .1LP      6,087
+        RLOG    .TTP     72,798
+
+In RCS5AP1S.LZH, the source archive, you will find the sources for the
+binaries (*.c, *.h, etc.) plus the nroff sources for the documentation
+(*.1, *.5, and also *.ms and one *.tex).  In addition, there is a README
+from the original distribution, and a file called PORTING.DOC, which
+contains some notes on how I did this port.
+
+        RCS5AP1S.LZH contains the following files:
+
+        CI      .1       10,408
+        CI      .C       35,840
+        CO      .1       15,249
+        CO      .C       23,098
+        CONF    .HEG      4,446
+        CONF    .SH      15,563
+        CONF    .ST       6,069
+        COPYING .        12,737         The GNU Public License, version 1
+        IDENT   .1        1,490
+        IDENT   .C        5,271
+        MAKEFILE.           663
+        MAKEFILE.ORI        593
+        MAKETIME.C        9,230
+        MERGE   .1        1,731
+        MERGE   .SH       2,207
+        PARTIME .C       20,327
+        PORTING .DOC      3,366         Notes on this port
+        RCS     .1        7,382
+        RCS     .C       44,514
+        RCS     .MS      58,430         A long paper about RCS
+        RCSBASE .H       25,372
+        RCSCLEAN.1        2,270
+        RCSCLEAN.SH       2,071
+        RCSDIFF .1        2,931
+        RCSDIFF .C       11,895
+        RCSEDIT .C       23,744
+        RCSFCMP .C        8,110
+        RCSFILE .5        6,420
+        RCSFNMS .C       34,323
+        RCSFREEZ.E_       1,791
+        RCSFREEZ.SH       3,360
+        RCSGEN  .C       12,092
+        RCSINTRO.1        9,498
+        RCSKEEP .C        9,798
+        RCSKEYS .C        2,681
+        RCSLEX  .C       25,188
+        RCSMAP  .C        3,245
+        RCSMERGE.1        3,269
+        RCSMERGE.C        7,729
+        RCSREV  .C       21,617
+        RCSSYN  .C       19,309
+        RCSUTIL .C       20,380
+        RCS_FUNC.MS       3,778
+        README  .        11,980         Original distribution readme
+        README  .AKP                    This file
+        RLOG    .1        5,330
+        RLOG    .C       34,471
+        SYSTEM  .C        4,494
+        VSSCS   .TEX      1,846         A discussion of RCS vs SCCS

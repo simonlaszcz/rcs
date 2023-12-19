@@ -1,0 +1,78 @@
+This file contains some notes from my porting effort.  It corresponds to
+RCS5AKP1, which is the first release of my port of RCS (Revision Control
+System, not Resource Construction Set) version 5.  The date of the release
+is Jan 30, 1991.
+
+First and foremost, the sources here compile under GCC 1.37.1 using the
+libraries from J.Bammi (bammi@cadence.com).  Your mileage may vary.  You
+will, at least, need to set ANSI_INCLUDES to zero to compile under a non-
+ANSI compiler.
+
+The file conf.h is a copy of conf.st, derived from conf.heg.  The original
+needed a lot of work.  Study it.  The options in makefile are mostly used to
+create conf.h from conf.sh, but since you create conf.h from conf.st (by
+copying it) you don't need to worry about most of them.
+
+I added some variables to conf.st.  The idea is that if you set them all to
+zero, you get EXACTLY the original code for the whole package.  You still
+get my name in the usage message, because the sources themselves are
+different.
+
+The variables I added are:
+
+VARIABLE NAME                           MEANING WHEN NONZERO
+
+DONT_USE_SIGNALS        Blows away all signal handling. Bammi's libs have
+                        some signal facilities, but I don't trust them.
+
+DONT_USE_FORK           Use system() instead.  See below about system().
+
+DONT_USE_MAIL           Just tell the guy he's breaking a lock rather than
+                        sending mail to the lock holder.
+
+ANSI_INCLUDE_FILES      Don't redeclare stuff that should come from ANSI
+                        include files.  This is actually more sweeping than
+                        that: check your compiler's warning output for
+                        things that are undeclared or redeclared.
+
+USE_AKP_PAIRS           Use my 12345678.123 filename code.
+
+HEAD_REV                Add the special name "head" as a rev name.
+
+bad_unlink              Tells the code that unlink(A) fails if A is R/O.
+
+terrible_rename         Tells the code that rename(A,B) fails if A is R/O.
+
+AKP_MODES               Define WORKMODE as this lib needs it, not UNIX style.
+
+AKP_BUGFIXES            Enables a couple of fixes for bugs I caught.
+
+I also added has_tmpnam; this is used in the code but wasn't present in 
+conf.heg.
+
+Grepping through the source files for each of these names will show you
+what I had to do for the port.  If you define them all to zero (or leave
+them undefined) you should get EXACTLY what was in the distribution,
+and you can start your own porting effort!
+
+I added .ttp to all the executables in the makefile, and commented out
+things like merge.
+
+rcsbase and conf.h together have declarations and prototypes for stuff
+that should come from include files if you actually have ANSI and POSIX
+includes.  Your library and include files may vary from mine.
+
+There's a serious set of bugs involving errno in rcsfnms.c: basically they
+assume it stays unchanged, or gets set to zero, through a successful
+library call.  This is contrary to both ANSI and POSIX.  I have fixed this
+as best I can, but I may not have gotten it right.
+
+ABOUT SYSTEM():
+
+The system() call that comes with Bammi's libs seems unnecessarily complex;
+it actually does something akin to a fork()/exec() when all it really has
+to do is spawn().  I replaced it with something that does spawn().  It also
+calls _unx2dos on the redirected input and output file names, which Bammi's
+system() didn't do, so system("diff a b >m:/diffout") wouldn't work.  My
+system.c is in the sources directory and used in the makefile.
+

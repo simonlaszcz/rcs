@@ -1,0 +1,5 @@
+The only difference between RCS5AP1 and RCS5AP2 is a minor change in the C
+runtime startup code, so the programs do not require strict adherence to
+the Atari Extended Argument Specification; adherence to the more lenient
+MWC convention will do.
+

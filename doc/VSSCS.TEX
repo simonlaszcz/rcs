@@ -1,0 +1,32 @@
+\documentstyle[12pt,fullpage]{article}
+\begin{document}
+\noindent i switched from SCCS to RCS many moons ago. the set of facilities that
+RCS provides is a proper superset of the facilities provided by SCCS.
+in my opinion key advantages of RCS over SCCS are:
+\begin{itemize}
+\item in addition to providing version control, RCS provides very flexible
+  configuration management facilities. ({\bf configuration}: set of versions
+  of files that make up a release/snapshot of a software system). it provides
+  both selection and composition mechanisms for configuration management. RCS
+can manage multiple configurations.
+\item provides facilities for merging updates from released configurations
+into the main development branch {\bf and} vice--versa.
+\item provides automatic identification. ({\bf identification}: stamping
+revisions and configurations with unique markers that unambiguously identifies
+the configuration -- and recursively so.)
+\item can control access control to be strict or loose.
+\item can provide access control beyond unix file protections.
+\item provides very flexible tools for pruning and maintaining an ancestral tree.
+\item provides user definable states to manage conflicting updates.
+\item tools (tried and proven) exist to manage multiple ancestral trees.
+\item tools exist to manage multiple directory hierarchies that
+make up a software system.
+\item RCS software runs on multiple platforms, including lots of non--unix ones.
+\item RCS's delta storage method is both more space and time efficient than
+SCCS's. (reverse deltas as opposed to interleaved deltas).
+\item its much better integrated with {\em make}(1).
+\end{itemize}
+\noindent if you need further info, documentation, references, statistics, or
+just want to shoot the breeze please drop by.\\
+cheers, bammi
+\end{document}

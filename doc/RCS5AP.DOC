@@ -1,0 +1,127 @@
+RCS5AP1 is release 1 of Allan Pratt's port of RCS (Revision Control System,
+not Resource Construction Kit) version 5.  The date of the release is Jan
+30, 1991.  This is a brief user document describing how to install this RCS
+system, the command line options to the main programs, and some of my
+changes. The full docs are also part of the distribution.
+
+INSTALLATION:
+
+1. Put the TTP's (ci, co, diff, ident, rcs, rcsdiff, rlog) someplace.
+
+2. Set up your environment:
+
+        PATH    a comma- or semicolon-separated list of directories
+                to search for the executable files.  CO and DIFF must
+                be in a directory named in the PATH.
+
+        USER    your name.  Don't use spaces.  I use apratt.
+
+        TMP     a directory name for temporary files.  A RAMdisk is a good
+                choice.  Must not have a trailing backslash.
+
+        PWD     your current directory. It need not be set, but if it is
+                it has to be right. Some shells set this, others don't.
+
+3. If you don't know what RCS is or how to use it, read this file, then
+   RCSINTRO.1LP, then the .1LP files for the various commands.
+
+4. Use rcs, ci, and co to your heart's content.
+
+A WORD ABOUT RCS AND FILE NAMES:
+
+Under UNIX, RCS files are named like the working file, but end with ,v.
+Since on an ST you are stuck with 12345678.123 for file names, there are
+some tricks.  In the first place, if there is no dot in the working file
+name, then the RCS file name is "name.,v" (dot is added).  If there is a
+dot, then ",v" is added.  It doesn't always fit in the three-character
+field after the dot, in which case it's just chopped off: "foo.ab" becomes
+"foo.ab," with no "v" while "foo.doc" is unchanged.  The final arbiter is
+that RCS files all start with the string "head" and it is assumed that
+working files never do.
+
+Examples:
+
+        Working file    RCS file
+
+        test            test.,v         note: added dot
+        test.c          test.c,v
+        test.ab         test.ab,
+        test.doc        test.doc        note: no change!
+
+The last case is troublesome.  If you have a subdirectory called RCS in the
+current current directory, the RCS file will be there, and there's no
+problem.  But if you don't have a subdirectory RCS, then the programs will
+complain that the file "test.doc,v" isn't an RCS file.  This is to protect
+you from having "test.doc" clobbered by "test.doc,v" (which GEMDOS sees as
+"test.doc" also).  Conversely, if you're in a directory where the RCS file
+test.doc exists, and RCS tries to treat it as a working file, you get a
+similar error message from RCS.
+
+BRIEF SUMMARY OF COMMAND LINE OPTIONS TO THE MAIN PROGRAMS:
+
+CI options:
+
+-r[REV]         set revision of checked-in file
+-l[REV]         ci, then co -l
+-u[REV]         ci, then co
+-q[REV]         quiet
+-f[REV]         force, even if file is unchanged
+-k[REV]         take keyword values (notably revision number) from working file
+-d[DATE]        use DATE as the checkin date; if missing, use file's date
+-mMSG           use MSG as log msg
+-nNAME          give the rev name NAME
+-NNAME          remove existing symbol NAME, then give the rev name NAME
+-sSTATE         give the rev state STATE
+-tFILE          take the descriptive text (not the log) from FILE
+-Vn             make the RCS file compatible with RCS version n
+
+CO options:
+
+-rREV           check out revision REV
+-f[REV]         force, even if writable file exists
+-l[REV]         check out as locked
+-u[REV]         check out as unlocked
+-p[REV]         check out and print to stdout
+-q[REV]         quiet
+-dDATE          check out last rev on or before DATE
+-jJLIST         join using JLIST
+-sSTATE         set state
+-wAUTHOR        check out last rev checked in or locked by AUTHOR
+-Vn             make the RCS file compatible with RCS version n
+
+RCS options:
+
+-i              initialize (empty) RCS file
+-bBRANCH        change default branch
+-cSYM           change comment symbol to SYM
+-aNAMES         add accessors
+-AFILE          add accessor list from FILE
+-eNAMES         remove accessors
+-lREV           lock rev
+-uREV           unlock rev
+-L              set strict locking
+-U              set loose locking
+-nNAME[:REV]    add a name (delete if :REV is missing)
+-NNAME:REV      add a name, even if it's already there
+-oREV[-REV]     delete one or more revisions
+-sSTATE:REV     change state
+-tFILE          set descriptive text (not log message) to contents of FILE
+-q              quiet
+-Vn             make RCS file compatible with RCS version n
+-k[MODE]        set keyword expansion mode to MODE (-kkv, -kkvl, -kk, -kv, -ko)
+
+As a special case (in my modified version, not the released RCS version 5),
+you can use the word "head" in place of any REV in the options, and the
+head revision of the file will be used.  This means you can assign a name
+to the head revision of a set of files using "rcs -nNAME:head rcs\*" even
+if they all have different head revision numbers.  This is similar to the
+script "rcsfreeze."  Using "head" as a revision number in other contexts
+might not work, so don't get too adventuresome.
+
+I have made no attempt to port the "merge" operation.  The Bourne-shell
+source to the shell script "merge" and the file rcsmerge.c are included
+here unmodified.  I don't know if the "join" operation works, either.  You
+need diff3 for these, and I have not included diff3 in my distribution.
+(The source is in the diff source archive, because it is part of that
+distribution, but I haven't tried compiling or running it.)
+
