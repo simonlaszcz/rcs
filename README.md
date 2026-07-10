@@ -1,3 +1,5 @@
+Moved to https://codeberg.org/simonlaszcz/rcs
+
 # RCS5AP1: RCS version 5, ported to TOS by Allan Pratt, release 1, 1/30/91.
 
 This is RCS (Revision Control System, not Resource Constructon Set) version
